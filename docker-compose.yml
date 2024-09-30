@@ -23,7 +23,7 @@ services:
   products-ms:
     build: ./products-ms
     volumes:
-      - ./client-gateway/src:/usr/src/app/src
+      - ./products-ms/src:/usr/src/app/src
     command: npm run start:dev
     environment:
       - DATABASE_URL: ${PRODUCTS_DATABASE_URL}
