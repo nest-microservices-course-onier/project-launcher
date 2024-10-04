@@ -10,6 +10,7 @@ services:
 
   # Gateway-MS
   client-gateway:
+    container_name: gateway
     build: ./client-gateway
     ports:
       - ${CLIENT_GATEWAY_PORT}:3000
@@ -21,16 +22,19 @@ services:
   
   # Products-MS
   products-ms:
+    container_name: products-ms
     build: ./products-ms
     volumes:
       - ./products-ms/src:/usr/src/app/src
     command: npm run start:dev
     environment:
+      - PORT: ${PRODUCTS_MS_PORT}
       - DATABASE_URL: ${PRODUCTS_DATABASE_URL}
       - NATS_SERVERS: ${NATS_SERVERS}
 
   # Orders-MS
   orders-ms:
+    container_name: orders-ms
     build: ./orders-ms
     depends_on:
       - orders-db
@@ -38,8 +42,26 @@ services:
       - ./orders-ms/src:/usr/src/app/src
     command: npm run start:dev
     environment:
+      - PORT: ${ORDERS_MS_PORT}
       - DATABASE_URL: ${POSTGRES_DATABASE_URL}
       - NATS_SERVERS: ${NATS_SERVERS}
+  
+  # Payments-MS
+  payments-ms:
+    container_name: payments-ms
+    build: ./payments-ms
+    ports:
+      - ${PAYMENTS_MS_PORT}:3003
+    volumes:
+      - ./payments-ms/src:/usr/src/app/src
+    command: npm run start:dev
+    environment:
+      - PORT: ${PAYMENTS_MS_PORT}
+      - NATS_SERVERS: ${NATS_SERVERS}
+      - STRIPE_SECRET_API_KEY: ${STRIPE_SECRET_API_KEY}
+      - STRIPE_SUCCESS_URL: ${STRIPE_SUCCESS_URL}
+      - STRIPE_CANCEL_URL: ${STRIPE_CANCEL_URL}
+      - STRIPE_ENDPOINT_SECRET: ${STRIPE_ENDPOINT_SECRET}
   
   # Orders Postgres DB
   orders-db:
