@@ -30,6 +30,8 @@ services:
     environment:
       - PORT: ${AUTH_MS_PORT}
       - NATS_SERVERS: ${NATS_SERVERS}
+      - DATABASE_URL: ${DATABASE_URL}
+      - JWT_SECRET: ${JWT_SECRET}
 
   # Products-MS
   products-ms:
