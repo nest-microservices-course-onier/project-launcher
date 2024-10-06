@@ -2,10 +2,18 @@
 
 # This repo in github will be pointing to the diferentes Microservices-repos on github
 
-# Steps to dev environment
+# Steps to development environment
 
 1. Clone the repositoty
-2.
+2. Create a copy of `.env.example` to `.env` and set environment variables as needed
+3. Execute the command `git submodule update --init --recursive` to rebuild submodules(microservices repositories)
+4. Execute command `docker compose up --build` (this way allow you to see errors in real time, so if you use `docker compose up -d` in detached mode you have to execute command `docker logs <container>` to see errors)
+
+# Production environment
+
+1. Clone the repositoty
+2. Create a copy of `.env.example` to `.env` and set environment variables as needed
+3. Create the images with the command `docker compose -f docker-compose.prod.yml build`
 
 ### Pasos para crear los Git Submodules
 
