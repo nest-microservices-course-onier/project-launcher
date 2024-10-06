@@ -16,8 +16,8 @@ services:
     ports:
       - ${CLIENT_GATEWAY_PORT}:${CLIENT_GATEWAY_PORT}
     environment:
-      - PORT: ${CLIENT_GATEWAY_PORT}
-      - NATS_SERVERS: ${NATS_SERVERS}
+      - PORT=${CLIENT_GATEWAY_PORT}
+      - NATS_SERVERS=${NATS_SERVERS}
 
   # Auth-ms
   auth-ms:
@@ -27,10 +27,10 @@ services:
       dockerfile: Dockerfile.prod
     image: auth-ms
     environment:
-      - PORT: ${AUTH_MS_PORT}
-      - NATS_SERVERS: ${NATS_SERVERS}
-      - DATABASE_URL: ${DATABASE_URL}
-      - JWT_SECRET: ${JWT_SECRET}
+      - PORT=${AUTH_MS_PORT}
+      - NATS_SERVERS=${NATS_SERVERS}
+      - DATABASE_URL=${AUTH_DATABASE_URL}
+      - JWT_SECRET=${JWT_SECRET}
 
   # Products-MS
   products-ms:
@@ -40,9 +40,9 @@ services:
       dockerfile: Dockerfile.prod
     image: products-ms
     environment:
-      - PORT: ${PRODUCTS_MS_PORT}
-      - NATS_SERVERS: ${NATS_SERVERS}
-      - DATABASE_URL: ${PRODUCTS_DATABASE_URL}
+      - PORT=${PRODUCTS_MS_PORT}
+      - NATS_SERVERS=${NATS_SERVERS}
+      - DATABASE_URL=${PRODUCTS_DATABASE_URL}
   
   # Payments-MS
   payments-ms:
@@ -54,12 +54,12 @@ services:
     ports:
       - ${PAYMENTS_MS_PORT}:${PAYMENTS_MS_PORT}
     environment:
-      - PORT: ${PAYMENTS_MS_PORT}
-      - NATS_SERVERS: ${NATS_SERVERS}
-      - STRIPE_SECRET_API_KEY: ${STRIPE_SECRET_API_KEY}
-      - STRIPE_SUCCESS_URL: ${STRIPE_SUCCESS_URL}
-      - STRIPE_CANCEL_URL: ${STRIPE_CANCEL_URL}
-      - STRIPE_ENDPOINT_SECRET: ${STRIPE_ENDPOINT_SECRET}
+      - PORT=${PAYMENTS_MS_PORT}
+      - NATS_SERVERS=${NATS_SERVERS}
+      - STRIPE_SECRET_API_KEY=${STRIPE_SECRET_API_KEY}
+      - STRIPE_SUCCESS_URL=${STRIPE_SUCCESS_URL}
+      - STRIPE_CANCEL_URL=${STRIPE_CANCEL_URL}
+      - STRIPE_ENDPOINT_SECRET=${STRIPE_ENDPOINT_SECRET}
 
   # Orders-MS
   orders-ms:
@@ -71,6 +71,6 @@ services:
         - ORDERS_DATABASE_URL=${ORDERS_DATABASE_URL}
     image: orders-ms
     environment:
-      - PORT: ${ORDERS_MS_PORT}
-      - DATABASE_URL: ${ORDERS_DATABASE_URL}
-      - NATS_SERVERS: ${NATS_SERVERS}
+      - PORT=${ORDERS_MS_PORT}
+      - DATABASE_URL=${ORDERS_DATABASE_URL}
+      - NATS_SERVERS=${NATS_SERVERS}

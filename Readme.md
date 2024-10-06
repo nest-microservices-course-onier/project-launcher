@@ -14,6 +14,7 @@
 1. Clone the repositoty
 2. Create a copy of `.env.example` to `.env` and set environment variables as needed
 3. Create the images with the command `docker compose -f docker-compose.prod.yml build`
+4. Run the app with the command `docker compose -f docker-compose.prod.yml up` or in detached mode `docker compose -f docker-compose.prod.yml up -d`
 
 ### Pasos para crear los Git Submodules
 
